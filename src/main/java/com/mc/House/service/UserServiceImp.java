@@ -20,7 +20,6 @@ public class UserServiceImp implements UserService{
         this.apartmentDAO = apartmentDAO;
     }
 
-
     @Override
     public List<User> findAll() {
         return userDAO.findAll();
@@ -30,7 +29,6 @@ public class UserServiceImp implements UserService{
     public User findById(Integer id) {
         return userDAO.findById(id);
     }
-
 
     @Override
     @Transactional //every time i modify database it should be this
@@ -43,7 +41,6 @@ public class UserServiceImp implements UserService{
         userDAO.saveUpdate(tempUser);
         return tempUser;
     }
-
 
     @Override
     public List<User> findByName(String name) {
@@ -66,6 +63,5 @@ public class UserServiceImp implements UserService{
     public User deleteById(Integer id) {
         return userDAO.deleteById(id);
     }
-
 
 }

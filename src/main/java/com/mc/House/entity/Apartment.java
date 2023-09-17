@@ -22,10 +22,8 @@ public class Apartment {
     private Integer address;
     @Column(name="street")
     private String  street;
-
     @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {CascadeType.MERGE,
-                    CascadeType.REFRESH, CascadeType.DETACH})
+                cascade = CascadeType.ALL)
     @JoinTable(name = "apartment_house_meeting",
             joinColumns = @JoinColumn(name = "apartment_id"),
             inverseJoinColumns = @JoinColumn(name = "house_meeting_id"))
@@ -38,7 +36,13 @@ public class Apartment {
     public void addHouseMeeting(HouseMeeting houseMeeting) {
         if (absolvedMeetings==null)
             absolvedMeetings = new ArrayList<>();
-        absolvedMeetings.add(houseMeeting);
+
+        boolean isAbsolved = absolvedMeetings.stream()
+                .anyMatch(houseMeeting1 -> houseMeeting1.getId() == houseMeeting.getId());
+
+        if (!isAbsolved){
+            absolvedMeetings.add(houseMeeting);
+        }
     }
 
     public Apartment() {

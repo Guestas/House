@@ -18,7 +18,6 @@ public class HouseMeeting {
     private String name;
     @Column(name="topics")
     private List<String> topics;
-
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.MERGE,
                     CascadeType.REFRESH, CascadeType.DETACH})
@@ -26,7 +25,6 @@ public class HouseMeeting {
             joinColumns = @JoinColumn(name = "house_meeting_id"),
             inverseJoinColumns = @JoinColumn(name = "apartment_id"))
     private List<Apartment> apartments;
-
 
     public void addApartment(Apartment apartment) {
         if (apartments==null)

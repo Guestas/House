@@ -2,7 +2,6 @@ package com.mc.House.service;
 
 import com.mc.House.dao.ApartmentDAO;
 import com.mc.House.dao.HouseMeetingDAO;
-import com.mc.House.dao.UserDAO;
 import com.mc.House.entity.Apartment;
 import com.mc.House.entity.HouseMeeting;
 import com.mc.House.rest.exceptions.DataNotFoundException;
@@ -13,8 +12,8 @@ import java.util.List;
 
 @Service
 public class ApartmentServiceImp implements ApartmentService{
-    private ApartmentDAO apartmentDAO;
-    private HouseMeetingDAO houseMeetingDAO;
+    private final ApartmentDAO apartmentDAO;
+    private final HouseMeetingDAO houseMeetingDAO;
     public ApartmentServiceImp(ApartmentDAO apartmentDAO, HouseMeetingDAO houseMeetingDAO){
         this.apartmentDAO = apartmentDAO;
         this.houseMeetingDAO = houseMeetingDAO;

@@ -1,15 +1,36 @@
 package com.mc.House.service;
 
-public class HouseMeetingServiceImpl {
+import com.mc.House.dao.HouseMeetingDAO;
+import com.mc.House.entity.HouseMeeting;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
-    //List<String> list = new ArrayList<>();
-    //		list.add("1. topic one.");
-    //		list.add("2. Topic two.");
-    //		list.add("3. Topic three.");
-    //
-    //		HouseMeeting hM = new HouseMeeting("1.1.1999", "Yearly meeting", list);
-    //		houseMeetingDAO.save(hM);
-    //		list.remove(2);
-    //		HouseMeeting hM2 = new HouseMeeting("1.1.2000", "Yearly meeting", list);
-    //		houseMeetingDAO.save(hM2);
+import java.util.List;
+
+@Service
+public class HouseMeetingServiceImpl implements HouseMeetingService {
+
+    private final HouseMeetingDAO houseMeetingDAO;
+
+    public HouseMeetingServiceImpl(HouseMeetingDAO houseMeetingDAO){
+        this.houseMeetingDAO = houseMeetingDAO;
+    }
+
+    @Override
+    public List<HouseMeeting> findAll() {
+        return houseMeetingDAO.findAll();
+    }
+
+    @Override
+    public HouseMeeting findById(Integer id) {
+        return houseMeetingDAO.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public HouseMeeting save(HouseMeeting houseMeeting) {
+        System.out.println(houseMeeting);
+        return houseMeetingDAO.saveUpdate(houseMeeting);
+    }
+
 }

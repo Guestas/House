@@ -4,10 +4,13 @@ import com.mc.House.entity.Apartment;
 import com.mc.House.entity.Helpers.ApartmentMeetingInput;
 import com.mc.House.entity.Helpers.UserAddHelper;
 import com.mc.House.entity.Helpers.UserUpdateHelper;
-import com.mc.House.rest.exceptions.DataNotFoundException;
+import com.mc.House.entity.HouseMeeting;
 import com.mc.House.entity.User;
+import com.mc.House.rest.exceptions.DataNotFoundException;
 import com.mc.House.service.ApartmentService;
+import com.mc.House.service.HouseMeetingService;
 import com.mc.House.service.UserService;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,27 +19,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class Controller {
-    private UserService userService;
-    private ApartmentService apartmentService;
+    //Load services
+    private final UserService userService;
+    private final ApartmentService apartmentService;
+    private final HouseMeetingService houseMeetingService;
     @Autowired
-    public Controller(ApartmentService apartmentService, UserService userService){
+    public Controller(ApartmentService apartmentService, UserService userService, HouseMeetingService houseMeetingService){
         this.userService = userService;
         this.apartmentService = apartmentService;
+        this.houseMeetingService = houseMeetingService;
     }
 
-/*
-    private List<User> userList;
+    //Created request's by type POST, PUT, GET and DEL this will communicate with Web browser or Postman ...
     @PostConstruct //caled once after start to download new data
     public void loadData(){
-        userList = userDAO.findAll();
+        System.out.println("Controller started!");
     }
- */
-
-    @GetMapping("/users/hello")
-        public String hello(){
-        return "hello user";
-    }
-
 
     @GetMapping("/users/")
     public List<User> getUsers() {
@@ -52,36 +50,40 @@ public class Controller {
         return user;
     }
 
-
     @PostMapping("/users/")
     public User addUser(@RequestBody UserAddHelper userIn){
+        if (userIn.getApartment()<0||userIn.getApartment()>126)
+            throw new DataNotFoundException("Id out of bounds "+userIn.getApartment());
         return userService.save(userIn);
     }
-    //{
-    //    "username":"Ala",
-    //    "email":"ala@s.z",
-    //    "phone":125432,
-    //    "owner":true,
-    //    "apartment":2
-    //}
+/* body in format:
+    {
+        "username":"Ala",
+        "email":"ala@s.z",
+        "phone":125432,
+        "owner":true,
+        "apartment":2
+    }
+*/
 
     @PutMapping("/users/")
     public User updateUser(@RequestBody UserUpdateHelper userIn){
         return userService.update(userIn);
     }
-    //{
-    //    "id":"131"
-    //    "username":"Ala",
-    //    "email":"ala@s.z",
-    //    "phone":125432,
-    //    "owner":true,
-    //    "apartment":2
-    //}
+/* body in format:
+    {
+        "id":"131",
+        "username":"Ala",
+        "email":"ala@s.z",
+        "phone":125432,
+        "owner":true,
+        "apartment":2
+    }
+*/
 
     @DeleteMapping("/users/{id}")
     public User dellUser(@PathVariable int id){
         User user = userService.deleteById(id);
-        //check id
         if (user==null)
             throw new DataNotFoundException("User not found "+id);
         return user;
@@ -93,15 +95,46 @@ public class Controller {
         return apartmentService.findAll();
     }
 
+    @GetMapping("/apartments/{id}")
+    public Apartment getApartmentById(@PathVariable int id){
+        return apartmentService.findByApartmentId(id);
+    }
+
     @PutMapping("/apartments/")
     public Apartment updateApartment(@RequestBody ApartmentMeetingInput apartmentMeetingInput){
         return apartmentService.addApartmentHouseMeeting(apartmentMeetingInput.getApartment(), apartmentMeetingInput.getHouseMeeting());
     }
-
-
-
-    @GetMapping("/apartments/hello")
-    public String hello2(){
-        return "hello apartment";
+/* body in format:
+    {
+        "apartment":1,
+        "houseMeeting":1
     }
+*/
+
+
+    @GetMapping("/houseMeetings/")
+    public List<HouseMeeting> getMeetings(){
+        return houseMeetingService.findAll();
+    }
+
+    @GetMapping("/houseMeetings/{id}")
+    public HouseMeeting getMeetingById(@PathVariable int id){
+        return houseMeetingService.findById(id);
+    }
+
+    @PostMapping("/houseMeetings/")
+    public HouseMeeting addHousemeeting(@RequestBody HouseMeeting houseMeeting){
+        return houseMeetingService.save(houseMeeting);
+    }
+/* body in format:
+    {
+        "date":"1.1.2001",
+        "name":"Meeting name.",
+        "topics":[
+            "1. First topic. ",
+            "2. Second topic. ",
+            "3. Third topic. "
+        ]
+    }
+*/
 }

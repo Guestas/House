@@ -3,7 +3,6 @@ package com.mc.House.dao;
 import com.mc.House.entity.HouseMeeting;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,9 +18,9 @@ public class HouseMeetingDAOImpl implements HouseMeetingDAO{
 
 
     @Override
-    @Transactional
-    public void save(HouseMeeting houseMeeting) {
-        entityManager.persist(houseMeeting);
+    public HouseMeeting saveUpdate(HouseMeeting houseMeeting) {
+        entityManager.merge(houseMeeting);
+        return houseMeeting;
     }
 
     @Override
