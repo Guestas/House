@@ -78,7 +78,7 @@ I recommend using the Postman app for testing requests. You can download it from
 }`
 
 2. Get all meetings: (GET) http://localhost:8080/api/houseMeetings/
-   
+
 3. Get meeting by id: (GET) http://localhost:8080/api/houseMeetings/meeting_id
 
 
