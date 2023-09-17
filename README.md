@@ -26,17 +26,21 @@ I recommend using the Postman app for testing requests. You can download it from
 ### Apartments requests:
 
 1. Get all apartments in json: (GET) http://localhost:8080/api/apartments/
+   
 2. Adding apartment to year meeting means Users have come there: (PUT) http://localhost:8080/api/apartments/ and json body
 
 `{
    "apartment":4,
    "houseMeeting":3
 }`
+
 3. Get apartment by ID it is apartment number: (GET) http://localhost:8080/api/apartments/apartment_id
 
 ### Users requests:
 1. Get all users: (GET) http://localhost:8080/api/users/
+   
 2. Get user by id: (GET) http://localhost:8080/api/users/user_id
+   
 3. Create new user: (POST) http://localhost:8080/api/users/ and json body
 
 `{
@@ -46,6 +50,7 @@ I recommend using the Postman app for testing requests. You can download it from
    "owner":true,
    "apartment":126
 }`
+
 4. Update user: (PUT) http://localhost:8080/api/users/ and json body
 
 `{
@@ -56,6 +61,7 @@ I recommend using the Postman app for testing requests. You can download it from
    "owner":true,
    "apartment":2
 }`
+
 5. Delete user: (DEL) http://localhost:8080/api/users/1user_id
 
 ### Meetings requests:
@@ -70,7 +76,9 @@ I recommend using the Postman app for testing requests. You can download it from
    "3. Third topic. "
    ]
 }`
+
 2. Get all meetings: (GET) http://localhost:8080/api/houseMeetings/
+   
 3. Get meeting by id: (GET) http://localhost:8080/api/houseMeetings/meeting_id
 
 
