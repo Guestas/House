@@ -28,7 +28,7 @@ I recommend using the Postman app for testing requests. You can download it from
 1. Get all apartments in json: (GET) http://localhost:8080/api/apartments/
 2. Adding apartment to year meeting means Users have come there: (PUT) http://localhost:8080/api/apartments/ and json body
 
-3. `{
+`{
    "apartment":4,
    "houseMeeting":3
 }`
@@ -61,7 +61,7 @@ I recommend using the Postman app for testing requests. You can download it from
 ### Meetings requests:
 1. Create meeting: (POST) http://localhost:8080/api/houseMeetings/ and json body
 
-2. `{
+`{
    "date":"1.1.2001",
    "name":"Third Meeting.",
    "topics":[
