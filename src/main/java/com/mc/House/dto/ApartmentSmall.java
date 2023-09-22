@@ -1,7 +1,6 @@
 package com.mc.House.dto;
 
 import jakarta.persistence.Column;
-//TODO finish shorter versions to print all
 public class ApartmentSmall {
     private Integer id;
 
