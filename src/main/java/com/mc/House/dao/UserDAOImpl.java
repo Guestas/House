@@ -1,5 +1,6 @@
 package com.mc.House.dao;
 
+import com.mc.House.dto.UserSmall;
 import com.mc.House.entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -25,11 +26,15 @@ public class UserDAOImpl implements UserDAO {
     public User findById(Integer id) {
         return entityManager.find(User.class, id);
     }
+
     @Override
-    public List<User> findAll() {
-        TypedQuery<User> query = entityManager.createQuery("FROM User ORDER BY username", User.class);
-        return query.getResultList();
+    public List<UserSmall> findUsersDetails() {
+        String queryString = "SELECT new com.mc.House.dto.UserSmall(u.id, u.username, u.email, u.phone) FROM User u";
+        TypedQuery<UserSmall> query = entityManager.createQuery(queryString, UserSmall.class);
+        List<UserSmall> result = query.getResultList();
+        return result.isEmpty() ? null : result;
     }
+
     @Override
     public User deleteById(Integer id) {
         User temp = entityManager.find(User.class, id);
@@ -42,4 +47,5 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("theData", name);
         return query.getResultList();
     }
+
 }

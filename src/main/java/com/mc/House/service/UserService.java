@@ -1,5 +1,6 @@
 package com.mc.House.service;
 
+import com.mc.House.dto.UserSmall;
 import com.mc.House.entity.Helpers.UserAddHelper;
 import com.mc.House.entity.Helpers.UserUpdateHelper;
 import com.mc.House.entity.User;
@@ -7,7 +8,7 @@ import com.mc.House.entity.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> findAll();//Get method
+    List<UserSmall> findUserDetails();
     User findById(Integer id);
 
     User save(UserAddHelper userAddHelper);
@@ -17,5 +18,7 @@ public interface UserService {
     User update(UserUpdateHelper userUpdateHelper);
 
     User deleteById(Integer id);
+
+
 
 }

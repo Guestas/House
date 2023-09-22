@@ -1,5 +1,8 @@
 package com.mc.House.rest;
 
+import com.mc.House.dto.ApartmentSmall;
+import com.mc.House.dto.HouseMeetingSmall;
+import com.mc.House.dto.UserSmall;
 import com.mc.House.entity.Apartment;
 import com.mc.House.entity.Helpers.ApartmentMeetingInput;
 import com.mc.House.entity.Helpers.UserAddHelper;
@@ -37,8 +40,8 @@ public class Controller {
     }
 
     @GetMapping("/users/")
-    public List<User> getUsers() {
-        return userService.findAll();
+    public List<UserSmall> getUserDetails() {
+        return userService.findUserDetails();
     }
 
     @GetMapping("/users/{id}")
@@ -90,10 +93,13 @@ public class Controller {
     }
 
 
+
+
     @GetMapping("/apartments/")
-    public List<Apartment> getApartments() {
-        return apartmentService.findAll();
+    public List<ApartmentSmall> getApartmentsall() {
+        return apartmentService.findAllSmall();
     }
+
 
     @GetMapping("/apartments/{id}")
     public Apartment getApartmentById(@PathVariable int id){
@@ -113,8 +119,8 @@ public class Controller {
 
 
     @GetMapping("/houseMeetings/")
-    public List<HouseMeeting> getMeetings(){
-        return houseMeetingService.findAll();
+    public List<HouseMeetingSmall> addHousemeetingsmall(){
+        return houseMeetingService.findAllSmall();
     }
 
     @GetMapping("/houseMeetings/{id}")

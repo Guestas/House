@@ -2,6 +2,7 @@ package com.mc.House.service;
 
 import com.mc.House.dao.ApartmentDAO;
 import com.mc.House.dao.UserDAO;
+import com.mc.House.dto.UserSmall;
 import com.mc.House.entity.Apartment;
 import com.mc.House.entity.Helpers.UserAddHelper;
 import com.mc.House.entity.Helpers.UserUpdateHelper;
@@ -21,13 +22,13 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public List<User> findAll() {
-        return userDAO.findAll();
+    public User findById(Integer id) {
+        return userDAO.findById(id);
     }
 
     @Override
-    public User findById(Integer id) {
-        return userDAO.findById(id);
+    public List<UserSmall> findUserDetails() {
+        return userDAO.findUsersDetails();
     }
 
     @Override
@@ -63,5 +64,6 @@ public class UserServiceImp implements UserService{
     public User deleteById(Integer id) {
         return userDAO.deleteById(id);
     }
+
 
 }

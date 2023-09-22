@@ -2,6 +2,7 @@ package com.mc.House.service;
 
 import com.mc.House.dao.ApartmentDAO;
 import com.mc.House.dao.HouseMeetingDAO;
+import com.mc.House.dto.ApartmentSmall;
 import com.mc.House.entity.Apartment;
 import com.mc.House.entity.HouseMeeting;
 import com.mc.House.rest.exceptions.DataNotFoundException;
@@ -24,8 +25,8 @@ public class ApartmentServiceImp implements ApartmentService{
     }
 
     @Override
-    public List<Apartment> findAll() {
-        return apartmentDAO.findAll();
+    public List<ApartmentSmall> findAllSmall() {
+        return apartmentDAO.findAllSmall();
     }
 
     @Override

@@ -87,4 +87,4 @@ I recommend using the Postman app for testing requests. You can download it from
 Rest contain classes responsible for handling HTTP requests and responses.
 Entity represent the data structure of application.
 Dao classes responsible for interacting with the database.
-Service interact with the DAO layer to retrieve or update data, and may perform other tasks such as validation or data transformation.
+Service interact with the DAO layer to retrieve or update data, and may perform other tasks such as validation or data transformation. DTO is for returning shorter versions of apartments, users and meetings it will be for sending all entities.
