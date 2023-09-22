@@ -28,7 +28,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<UserSmall> findUsersDetails() {
+    public List<UserSmall> findAllUsers() {
         String queryString = "SELECT new com.mc.House.dto.UserSmall(u.id, u.username, u.email, u.phone) FROM User u";
         TypedQuery<UserSmall> query = entityManager.createQuery(queryString, UserSmall.class);
         List<UserSmall> result = query.getResultList();

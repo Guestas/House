@@ -19,7 +19,6 @@ public class UserAddHelper {
     }
 
     public User getUser(){
-        System.out.println(username+email+phone+owner+apartment);
         return new User(username, email, phone, owner);
     }
     public int getApartment(){

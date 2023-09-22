@@ -9,7 +9,7 @@ public interface HouseMeetingService {
 
     List<HouseMeetingSmall> findAllSmall();
 
-    public HouseMeeting findById(Integer id);
+    HouseMeeting findById(Integer id);
 
     HouseMeeting save(HouseMeeting houseMeeting);
 

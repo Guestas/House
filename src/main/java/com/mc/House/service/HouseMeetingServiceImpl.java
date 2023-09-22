@@ -31,7 +31,6 @@ public class HouseMeetingServiceImpl implements HouseMeetingService {
     @Override
     @Transactional
     public HouseMeeting save(HouseMeeting houseMeeting) {
-        System.out.println(houseMeeting);
         return houseMeetingDAO.saveUpdate(houseMeeting);
     }
 

@@ -41,7 +41,7 @@ public class Controller {
 
     @GetMapping("/users/")
     public List<UserSmall> getUserDetails() {
-        return userService.findUserDetails();
+        return userService.findAllUsers();
     }
 
     @GetMapping("/users/{id}")

@@ -27,8 +27,8 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public List<UserSmall> findUserDetails() {
-        return userDAO.findUsersDetails();
+    public List<UserSmall> findAllUsers() {
+        return userDAO.findAllUsers();
     }
 
     @Override
@@ -53,7 +53,6 @@ public class UserServiceImp implements UserService{
     public User update(UserUpdateHelper userUpdateHelper) {
         Apartment n = apartmentDAO.findById(userUpdateHelper.getApartment());
         User tempUser = userUpdateHelper.getUser();
-        tempUser.setId(0);//set to 0 for add new ithem instead of update
         tempUser.setApartment(n);
         userDAO.saveUpdate(tempUser);
         return tempUser;

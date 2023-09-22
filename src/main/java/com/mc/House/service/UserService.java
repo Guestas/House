@@ -8,7 +8,7 @@ import com.mc.House.entity.User;
 import java.util.List;
 
 public interface UserService {
-    List<UserSmall> findUserDetails();
+    List<UserSmall> findAllUsers();
     User findById(Integer id);
 
     User save(UserAddHelper userAddHelper);
