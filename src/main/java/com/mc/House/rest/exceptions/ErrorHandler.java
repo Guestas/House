@@ -18,12 +18,13 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<UserErrorResponse> handleException(Exception exc){
+    public ResponseEntity<UserErrorResponse> handleException(Exception exc){//universal return message
+        System.out.println("baaad " + exc);
         UserErrorResponse err = new UserErrorResponse();
         err.setStat(HttpStatus.BAD_REQUEST.value());
         err.setMessage(exc.getMessage());
         err.setTimeStamp(System.currentTimeMillis());
-        return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 
 }

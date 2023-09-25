@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class UserServiceImp implements UserService{
 
-    private UserDAO userDAO;
-    private ApartmentDAO apartmentDAO;
+    private final UserDAO userDAO;
+    private final ApartmentDAO apartmentDAO;
     public UserServiceImp(UserDAO userDAO, ApartmentDAO apartmentDAO){
         this.userDAO = userDAO;
         this.apartmentDAO = apartmentDAO;
@@ -36,11 +36,10 @@ public class UserServiceImp implements UserService{
     public User save(UserAddHelper userAddHelper) {
         Apartment n = apartmentDAO.findById(userAddHelper.getApartment());
         User tempUser = userAddHelper.getUser();
-        tempUser.setId(0);//set to 0 for add new ithem instead of update
+        tempUser.setId(0);//set to 0 for add new item instead of update
         tempUser.setApartment(n);
 
-        userDAO.saveUpdate(tempUser);
-        return tempUser;
+        return userDAO.saveUpdate(tempUser);
     }
 
     @Override
@@ -49,13 +48,12 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    @Transactional //every time i modify database it should be this
+    @Transactional //every time I modify database it should be this
     public User update(UserUpdateHelper userUpdateHelper) {
         Apartment n = apartmentDAO.findById(userUpdateHelper.getApartment());
         User tempUser = userUpdateHelper.getUser();
         tempUser.setApartment(n);
-        userDAO.saveUpdate(tempUser);
-        return tempUser;
+        return userDAO.saveUpdate(tempUser);
     }
 
     @Override

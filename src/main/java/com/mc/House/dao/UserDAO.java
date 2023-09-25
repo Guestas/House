@@ -6,7 +6,7 @@ import com.mc.House.entity.User;
 import java.util.List;
 
 public interface UserDAO {
-    void saveUpdate(User user);
+    User saveUpdate(User user);
     User findById(Integer id);
     List<UserSmall> findAllUsers();
     User deleteById(Integer id);

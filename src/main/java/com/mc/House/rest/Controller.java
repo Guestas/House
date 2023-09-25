@@ -55,8 +55,7 @@ public class Controller {
 
     @PostMapping("/users/")
     public User addUser(@RequestBody UserAddHelper userIn){
-        if (userIn.getApartment()<0||userIn.getApartment()>126)
-            throw new DataNotFoundException("Id out of bounds "+userIn.getApartment());
+
         return userService.save(userIn);
     }
 /* body in format:
@@ -71,6 +70,9 @@ public class Controller {
 
     @PutMapping("/users/")
     public User updateUser(@RequestBody UserUpdateHelper userIn){
+        User user = userService.findById(userIn.getUser().getId());
+        if (user==null)
+            throw new DataNotFoundException("User not found "+ userIn.getUser().getId());
         return userService.update(userIn);
     }
 /* body in format:
@@ -103,6 +105,8 @@ public class Controller {
 
     @GetMapping("/apartments/{id}")
     public Apartment getApartmentById(@PathVariable int id){
+        if (id<0||id>126)
+            throw new DataNotFoundException("Apartment ID out of bounds "+id);
         return apartmentService.findByApartmentId(id);
     }
 

@@ -19,8 +19,8 @@ public class UserDAOImpl implements UserDAO {
         this.entityManager = entityManager;
     }
     @Override
-    public void saveUpdate(User user) {
-        entityManager.merge(user);
+    public User saveUpdate(User user) {
+        return entityManager.merge(user);
     }//merge is if empty create or update instead of persist
     @Override
     public User findById(Integer id) {
