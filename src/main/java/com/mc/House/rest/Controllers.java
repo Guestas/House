@@ -15,19 +15,21 @@ import com.mc.House.service.HouseMeetingService;
 import com.mc.House.service.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@RestController
+@Controller //returning pages bur RestController returning only data
 @RequestMapping("/api")
-public class Controller {
+public class Controllers {
     //Load services
     private final UserService userService;
     private final ApartmentService apartmentService;
     private final HouseMeetingService houseMeetingService;
     @Autowired
-    public Controller(ApartmentService apartmentService, UserService userService, HouseMeetingService houseMeetingService){
+    public Controllers(ApartmentService apartmentService, UserService userService, HouseMeetingService houseMeetingService){
         this.userService = userService;
         this.apartmentService = apartmentService;
         this.houseMeetingService = houseMeetingService;
@@ -39,12 +41,21 @@ public class Controller {
         System.out.println("Controller started!");
     }
 
+
+    @GetMapping("/greeting")
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "greeting";
+    }
+
     @GetMapping("/users/")
+    @ResponseBody
     public List<UserSmall> getUserDetails() {
         return userService.findAllUsers();
     }
 
     @GetMapping("/users/{id}")
+    @ResponseBody
     public User getUsersByID(@PathVariable int id){
         User user = userService.findById(id);
         //check id
@@ -54,6 +65,7 @@ public class Controller {
     }
 
     @PostMapping("/users/")
+    @ResponseBody
     public User addUser(@RequestBody UserAddHelper userIn){
 
         return userService.save(userIn);
@@ -69,6 +81,7 @@ public class Controller {
 */
 
     @PutMapping("/users/")
+    @ResponseBody
     public User updateUser(@RequestBody UserUpdateHelper userIn){
         User user = userService.findById(userIn.getUser().getId());
         if (user==null)
@@ -87,6 +100,7 @@ public class Controller {
 */
 
     @DeleteMapping("/users/{id}")
+    @ResponseBody
     public User dellUser(@PathVariable int id){
         User user = userService.deleteById(id);
         if (user==null)
@@ -98,12 +112,14 @@ public class Controller {
 
 
     @GetMapping("/apartments/")
+    @ResponseBody
     public List<ApartmentSmall> getApartmentsall() {
         return apartmentService.findAllSmall();
     }
 
 
     @GetMapping("/apartments/{id}")
+    @ResponseBody
     public Apartment getApartmentById(@PathVariable int id){
         if (id<0||id>126)
             throw new DataNotFoundException("Apartment ID out of bounds "+id);
@@ -111,6 +127,7 @@ public class Controller {
     }
 
     @PutMapping("/apartments/")
+    @ResponseBody
     public Apartment updateApartment(@RequestBody ApartmentMeetingInput apartmentMeetingInput){
         return apartmentService.addApartmentHouseMeeting(apartmentMeetingInput.getApartment(), apartmentMeetingInput.getHouseMeeting());
     }
@@ -123,16 +140,19 @@ public class Controller {
 
 
     @GetMapping("/houseMeetings/")
+    @ResponseBody
     public List<HouseMeetingSmall> addHousemeetingsmall(){
         return houseMeetingService.findAllSmall();
     }
 
     @GetMapping("/houseMeetings/{id}")
+    @ResponseBody
     public HouseMeeting getMeetingById(@PathVariable int id){
         return houseMeetingService.findById(id);
     }
 
     @PostMapping("/houseMeetings/")
+    @ResponseBody
     public HouseMeeting addHousemeeting(@RequestBody HouseMeeting houseMeeting){
         return houseMeetingService.save(houseMeeting);
     }
