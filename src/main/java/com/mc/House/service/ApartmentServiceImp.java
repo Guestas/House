@@ -5,7 +5,7 @@ import com.mc.House.dao.HouseMeetingDAO;
 import com.mc.House.dto.ApartmentSmall;
 import com.mc.House.entity.Apartment;
 import com.mc.House.entity.HouseMeeting;
-import com.mc.House.rest.exceptions.DataNotFoundException;
+import com.mc.House.api.exceptions.DataNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

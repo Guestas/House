@@ -9,6 +9,41 @@ public class UserAddHelper {
     private Boolean owner;
     private int apartment;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public Boolean getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Boolean owner) {
+        this.owner = owner;
+    }
+
+    public void setApartment(int apartment) {
+        this.apartment = apartment;
+    }
 
     public UserAddHelper(String username, String email, Integer phone, Boolean owner, int apartment) {
         this.username = username;
@@ -16,6 +51,10 @@ public class UserAddHelper {
         this.phone = phone;
         this.owner = owner;
         this.apartment = apartment;
+    }
+
+    public UserAddHelper() {
+
     }
 
     public User getUser(){

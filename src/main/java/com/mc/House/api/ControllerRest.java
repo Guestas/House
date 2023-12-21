@@ -1,5 +1,6 @@
-package com.mc.House.rest;
+package com.mc.House.api;
 
+import com.mc.House.api.exceptions.DataNotFoundException;
 import com.mc.House.dto.ApartmentSmall;
 import com.mc.House.dto.HouseMeetingSmall;
 import com.mc.House.dto.UserSmall;
@@ -9,7 +10,6 @@ import com.mc.House.entity.Helpers.UserAddHelper;
 import com.mc.House.entity.Helpers.UserUpdateHelper;
 import com.mc.House.entity.HouseMeeting;
 import com.mc.House.entity.User;
-import com.mc.House.rest.exceptions.DataNotFoundException;
 import com.mc.House.service.ApartmentService;
 import com.mc.House.service.HouseMeetingService;
 import com.mc.House.service.UserService;
@@ -21,28 +21,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class Controller {
-    //Load services
+public class ControllerRest {
     private final UserService userService;
     private final ApartmentService apartmentService;
     private final HouseMeetingService houseMeetingService;
     @Autowired
-    public Controller(ApartmentService apartmentService, UserService userService, HouseMeetingService houseMeetingService){
+    public ControllerRest(ApartmentService apartmentService, UserService userService, HouseMeetingService houseMeetingService){
         this.userService = userService;
         this.apartmentService = apartmentService;
         this.houseMeetingService = houseMeetingService;
     }
 
-    //Created request's by type POST, PUT, GET and DEL this will communicate with Web browser or Postman ...
     @PostConstruct //caled once after start to download new data
     public void loadData(){
-        System.out.println("Controller started!");
+        System.out.println("Rest controller started!");
     }
 
     @GetMapping("/users/")
-    public List<UserSmall> getUserDetails() {
-        return userService.findAllUsers();
-    }
+    public List<UserSmall> getUserDetails() {return userService.findAllUsers();}
 
     @GetMapping("/users/{id}")
     public User getUsersByID(@PathVariable int id){
@@ -95,15 +91,11 @@ public class Controller {
     }
 
 
-
-
     @GetMapping("/apartments/")
-    public List<ApartmentSmall> getApartmentsall() {
-        return apartmentService.findAllSmall();
-    }
-
+    public List<ApartmentSmall> getApartmentsall() {return apartmentService.findAllSmall();}
 
     @GetMapping("/apartments/{id}")
+    @ResponseBody
     public Apartment getApartmentById(@PathVariable int id){
         if (id<0||id>126)
             throw new DataNotFoundException("Apartment ID out of bounds "+id);
@@ -111,6 +103,7 @@ public class Controller {
     }
 
     @PutMapping("/apartments/")
+    @ResponseBody
     public Apartment updateApartment(@RequestBody ApartmentMeetingInput apartmentMeetingInput){
         return apartmentService.addApartmentHouseMeeting(apartmentMeetingInput.getApartment(), apartmentMeetingInput.getHouseMeeting());
     }
@@ -123,16 +116,19 @@ public class Controller {
 
 
     @GetMapping("/houseMeetings/")
+    @ResponseBody
     public List<HouseMeetingSmall> addHousemeetingsmall(){
         return houseMeetingService.findAllSmall();
     }
 
     @GetMapping("/houseMeetings/{id}")
+    @ResponseBody
     public HouseMeeting getMeetingById(@PathVariable int id){
         return houseMeetingService.findById(id);
     }
 
     @PostMapping("/houseMeetings/")
+    @ResponseBody
     public HouseMeeting addHousemeeting(@RequestBody HouseMeeting houseMeeting){
         return houseMeetingService.save(houseMeeting);
     }

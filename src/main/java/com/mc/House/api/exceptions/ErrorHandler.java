@@ -1,4 +1,4 @@
-package com.mc.House.rest.exceptions;
+package com.mc.House.api.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
