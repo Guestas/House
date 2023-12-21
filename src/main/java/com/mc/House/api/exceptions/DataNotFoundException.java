@@ -1,4 +1,4 @@
-package com.mc.House.rest.exceptions;
+package com.mc.House.api.exceptions;
 
 public class DataNotFoundException extends RuntimeException {
     public DataNotFoundException(String message) {

@@ -18,7 +18,7 @@ public class HouseDataApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(){
 		return runner -> {
-			System.out.println("App is running!");
+			System.out.println("API is running!");
 		};
 	}
 
